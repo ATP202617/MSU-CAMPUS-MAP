@@ -1,0 +1,194 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100vh;
+}
+
+#menuButton{
+    position:absolute;
+    top:75px;
+    left:20px;
+    
+
+    background:#40e0d0;
+    border:none;
+    padding:12px 20px;
+
+    border-radius:30px;
+    font-size:20px;
+    cursor:pointer;
+    z-index:1000;
+}
+
+#menu{
+    position:absolute;
+    top:130px;
+    left:20px;
+
+    width:250px;
+    max-height:400px;
+
+    overflow:auto;
+
+    background:white;
+
+    border-radius:15px;
+
+    display:none;
+
+    z-index:1000;
+
+    padding:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+#menu ul{
+    list-style:none;
+    padding:0;
+}
+
+#menu li{
+    padding:10px;
+    cursor:pointer;
+    border-bottom:1px solid #ddd;
+}
+
+#menu li:hover{
+    background:#f2f2f2;
+}
+
+#searchBox{
+    position:absolute;
+    top:20px;
+    left:20px;
+    width:260px;
+
+    z-index:1000;
+
+    padding:12px;
+
+    border-radius:25px;
+
+    border:none;
+
+    font-size:16px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+
+#coordinates{
+    position:absolute;
+    bottom:15px;
+    left:15px;
+    background:white;
+    padding:10px 15px;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    z-index:1000;
+}
+
+#addBuilding{
+    position:absolute;
+    top:250px;
+    right:20px;
+    width:260px;
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+    z-index:1000;
+    font-family:Arial,sans-serif;
+}
+
+#addBuilding input,
+#addBuilding textarea,
+#addBuilding button{
+    width:100%;
+    margin-top:8px;
+    padding:8px;
+    box-sizing:border-box;
+}
+
+#outputCode{
+    font-family:monospace;
+}
+
+#navigationPanel {
+    
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    width: 330px;
+
+    background: rgba(255,255,255,0.96);
+    border-radius: 18px;
+    padding: 18px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.20);
+
+    z-index: 1000;
+}
+
+
+#navigationPanel h3 {
+    margin-top: 0;
+}
+
+#navigationPanel select,
+#navigationPanel button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+    #navigationPanel button {
+    background: #00695c;
+    color: white;
+    cursor: pointer;
+}
+
+#navigationPanel button:hover {
+    background: #004d40;
+}
+
+#navigationPanel select {
+    border: 1px solid #ccc;
+    background: white;
+}
+
+#roadEditorPanel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 260px;
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    z-index: 9999;
+}
+
+#roadEditorPanel,
+#addBuilding,
+#navigationPanel{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}

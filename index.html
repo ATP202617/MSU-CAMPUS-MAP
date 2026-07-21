@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSU Campus Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <input
+    type="text"
+    id="searchBox"
+    placeholder="Search a building..."
+>
+
+<button id="menuButton">☰ Landmarks</button>
+<div id="menu">
+    <h3>Landmarks</h3>
+    <ul id="landmarkList"></ul>
+</div>
+
+<div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+ <div id="navigationPanel">
+    <h3>Campus Navigation</h3>
+
+    <select id="startLocation">
+        <option value="">Choose starting point</option>
+    </select>
+
+    <select id="destinationLocation">
+        <option value="">Choose destination</option>
+    </select>
+
+    <button id="myLocation" type="button">
+    📍 Use My Location
+    </button>
+
+    <button id="showRoute" type="button">
+        Show Route
+    </button>
+
+    <button id="clearRoute" type="button">
+        Clear Route
+    </button>
+</div>   
+
+<div id="addBuilding">
+    <h3>Add Building</h3>
+
+    <input type="text" id="bName" placeholder="Building Name">
+
+<input type="text" id="bDescription" placeholder="Description">
+
+<input type="text" id="bIcon" placeholder="Icon name">
+
+<button id="copyCode" type="button">Generate Code</button>
+
+<textarea id="outputCode" rows="8" readonly></textarea>
+    
+</div>
+
+    
+
+<div id="coordinates">
+    Click anywhere on the map
+</div>
+
+    <div id="roadEditorPanel">
+    <h3>Road Editor</h3>
+
+    <label>
+        <input type="checkbox" id="roadEditMode">
+        Road Edit Mode
+    </label>
+
+    <p id="roadEditorStatus">Editing is OFF</p>
+
+    <button id="exportRoadNodesBtn">
+        Generate Road Nodes
+    </button>
+
+    <button id="exportConnectionsBtn">
+        Generate Connections
+    </button>
+</div>
+
+<script src="locations.js"></script>
+<script src="roadNodes.js"></script>
+<script src="roadConnections.js"></script>
+<script src="app.js"></script>
+<script src="navigation.js"></script>
+
+
+</body>
+</html>
