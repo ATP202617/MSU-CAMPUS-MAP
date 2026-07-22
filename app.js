@@ -515,6 +515,15 @@ let currentLocationCircle = null;
     return nearest;
 }
 
+    const currentLocationIcon = L.divIcon({
+    className: "current-location-icon",
+    html: '<div class="blue-location-dot"></div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12]
+});
+
+    
+
 function snapToNearestRoadSegment(position) {
   let closestPoint = position;
   let shortestDistance = Infinity;
@@ -585,6 +594,70 @@ function snapToNearestRoadSegment(position) {
   return closestPoint;
 }
 
+    function moveMarkerSmoothly(marker, newPosition, duration = 800) {
+  const startPosition = marker.getLatLng();
+
+  const startY = startPosition.lat;
+  const startX = startPosition.lng;
+
+  const endY = newPosition[0];
+  const endX = newPosition[1];
+
+  const startTime = performance.now();
+
+  function animate(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const currentY = startY + (endY - startY) * progress;
+    const currentX = startX + (endX - startX) * progress;
+
+    marker.setLatLng([currentY, currentX]);
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+    function moveMarkerSmoothly(marker, newPosition, duration = 1000) {
+
+    const start = marker.getLatLng();
+
+    const startY = start.lat;
+    const startX = start.lng;
+
+    const endY = newPosition[0];
+    const endX = newPosition[1];
+
+    const startTime = performance.now();
+
+    function animate(time) {
+
+        const progress = Math.min(
+            (time - startTime) / duration,
+            1
+        );
+
+        const currentY =
+            startY + (endY - startY) * progress;
+
+        const currentX =
+            startX + (endX - startX) * progress;
+
+        marker.setLatLng([currentY, currentX]);
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
+
+    }
+
+    requestAnimationFrame(animate);
+}
+
 function startCurrentLocation() {
   if (!navigator.geolocation) {
     alert("Your device does not support GPS location.");
@@ -622,8 +695,13 @@ function startCurrentLocation() {
 
         map.setView(snappedPosition, 1);
       } else {
-        currentLocationMarker.setLatLng(snappedPosition);
-        currentLocationCircle.setLatLng(snappedPosition);
+        moveMarkerSmoothly(
+         currentLocationMarker,
+         snappedPosition,
+        1000
+      );
+
+currentLocationCircle.setLatLng(snappedPosition);
       }
     },
     function (error) {
