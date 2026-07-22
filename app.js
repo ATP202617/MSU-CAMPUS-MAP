@@ -515,6 +515,76 @@ let currentLocationCircle = null;
     return nearest;
 }
 
+function snapToNearestRoadSegment(position) {
+  let closestPoint = position;
+  let shortestDistance = Infinity;
+
+  const pointY = position[0];
+  const pointX = position[1];
+
+  Object.entries(roadConnections).forEach(
+    ([startNodeId, connectedNodeIds]) => {
+
+      const startNode = roadNodes.find(
+        node => node.id === startNodeId
+      );
+
+      if (!startNode) return;
+
+      connectedNodeIds.forEach(endNodeId => {
+        const endNode = roadNodes.find(
+          node => node.id === endNodeId
+        );
+
+        if (!endNode) return;
+
+        const x1 = startNode.x;
+        const y1 = startNode.y;
+        const x2 = endNode.x;
+        const y2 = endNode.y;
+
+        const segmentX = x2 - x1;
+        const segmentY = y2 - y1;
+
+        const segmentLengthSquared =
+          segmentX * segmentX +
+          segmentY * segmentY;
+
+        if (segmentLengthSquared === 0) return;
+
+        let t =
+          ((pointX - x1) * segmentX +
+            (pointY - y1) * segmentY) /
+          segmentLengthSquared;
+
+        t = Math.max(0, Math.min(1, t));
+
+        const projectedX = x1 + t * segmentX;
+        const projectedY = y1 + t * segmentY;
+
+        const distanceX = pointX - projectedX;
+        const distanceY = pointY - projectedY;
+
+        const distance = Math.sqrt(
+          distanceX * distanceX +
+          distanceY * distanceY
+        );
+
+        if (distance < shortestDistance) {
+          shortestDistance = distance;
+
+          closestPoint = [
+            projectedY,
+            projectedX
+          ];
+        }
+      });
+    }
+  );
+
+  return closestPoint;
+}
+
 function startCurrentLocation() {
   if (!navigator.geolocation) {
     alert("Your device does not support GPS location.");
@@ -535,15 +605,14 @@ function startCurrentLocation() {
       // We will convert the real GPS coordinates to your campus map coordinates next.
       const temporaryMapPosition = gpsToMap(latitude, longitude);
 
-        const nearestNode = getNearestRoadNode(temporaryMapPosition);
-
-    const snappedPosition = [
-    nearestNode.y,
-    nearestNode.x
-    ];
+        const snappedPosition =
+  snapToNearestRoadSegment(temporaryMapPosition);
 
       if (!currentLocationMarker) {
-        currentLocationMarker = L.marker(snappedPosition)
+        currentLocationMarker = L.marker(snappedPosition, {
+  icon: currentLocationIcon,
+  zIndexOffset: 1000
+})
           .addTo(map)
           .bindPopup("You are here");
 
