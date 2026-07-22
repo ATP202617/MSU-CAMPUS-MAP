@@ -469,3 +469,111 @@ exportRoadNodesBtn.addEventListener("click", function () {
     );
 
 });
+
+    let currentLocationMarker = null;
+let currentLocationCircle = null;
+
+   function gpsToMap(latitude, longitude) {
+  const centerLatitude = 7.997339028830308;
+  const centerLongitude = 124.25986365408066;
+
+  const longitudeDifference = longitude - centerLongitude;
+  const latitudeDifference = latitude - centerLatitude;
+
+  const x =
+    134169.139685 * longitudeDifference -
+    3151.575111 * latitudeDifference +
+    558.733333;
+
+  const y =
+    693.276111 * longitudeDifference +
+    110604.970236 * latitudeDifference +
+    525.866667;
+
+  // Your coordinates are X, Y.
+  // Leaflet needs Y, X.
+  return [y, x];
+
+
+}
+
+    function getNearestRoadNode(mapPosition) {
+    let nearest = null;
+    let shortestDistance = Infinity;
+
+    roadNodes.forEach(node => {
+        const dx = node.x - mapPosition[1];
+        const dy = node.y - mapPosition[0];
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < shortestDistance) {
+            shortestDistance = distance;
+            nearest = node;
+        }
+    });
+
+    return nearest;
+}
+
+function startCurrentLocation() {
+  if (!navigator.geolocation) {
+    alert("Your device does not support GPS location.");
+    return;
+  }
+
+  navigator.geolocation.watchPosition(
+    function (position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
+      console.log("Latitude:", latitude);
+      console.log("Longitude:", longitude);
+      console.log("Accuracy:", accuracy);
+
+      // Temporary location marker.
+      // We will convert the real GPS coordinates to your campus map coordinates next.
+      const temporaryMapPosition = gpsToMap(latitude, longitude);
+
+        const nearestNode = getNearestRoadNode(temporaryMapPosition);
+
+    const snappedPosition = [
+    nearestNode.y,
+    nearestNode.x
+    ];
+
+      if (!currentLocationMarker) {
+        currentLocationMarker = L.marker(snappedPosition)
+          .addTo(map)
+          .bindPopup("You are here");
+
+        currentLocationCircle = L.circle(snappedPosition, {
+          radius: 15
+        }).addTo(map);
+
+        map.setView(snappedPosition, 1);
+      } else {
+        currentLocationMarker.setLatLng(snappedPosition);
+        currentLocationCircle.setLatLng(snappedPosition);
+      }
+    },
+    function (error) {
+      console.error(error);
+
+      if (error.code === 1) {
+        alert("Location permission was denied. Please allow location access.");
+      } else if (error.code === 2) {
+        alert("Your location is currently unavailable.");
+      } else if (error.code === 3) {
+        alert("Location request timed out.");
+      }
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 0,
+      timeout: 15000
+    }
+  );
+}
+
+startCurrentLocation();
