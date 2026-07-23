@@ -170,44 +170,11 @@ const roadRoutes = {
 };
 
 
-
-
-
-
-
-    let userMarker = null;
-
 document.getElementById("myLocation").addEventListener("click", function () {
-
-    if (!navigator.geolocation) {
-        alert("Your browser does not support GPS.");
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-        function (position) {
-
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-
-            if (userMarker) {
-                map.removeLayer(userMarker);
-            }
-
-            userMarker = L.marker([lat, lng])
-                .addTo(map)
-                .bindPopup("📍 You are here")
-                .openPopup();
-
-            map.setView([lat, lng], 18);
-
-        },
-        function () {
-            alert("Unable to get your location.");
-        }
-    );
-
+    startCurrentLocation();
 });
+
+
 
     if (ADMIN_MODE){
 
@@ -471,7 +438,8 @@ exportRoadNodesBtn.addEventListener("click", function () {
 });
 
     let currentLocationMarker = null;
-let currentLocationCircle = null;
+    let currentLocationCircle = null;
+    let lastRouteUpdatePosition = null;
 
    function gpsToMap(latitude, longitude) {
   const centerLatitude = 7.997339028830308;
@@ -522,7 +490,7 @@ let currentLocationCircle = null;
     iconAnchor: [12, 12]
 });
 
-    
+
 
 function snapToNearestRoadSegment(position) {
   let closestPoint = position;
@@ -702,8 +670,19 @@ function startCurrentLocation() {
       );
 
 currentLocationCircle.setLatLng(snappedPosition);
-      }
-    },
+      if (typeof updateRouteFromCurrentLocation === "function") {
+
+    if (
+        !lastRouteUpdatePosition ||
+        map.distance(lastRouteUpdatePosition, snappedPosition) >= 5
+    ) {
+        lastRouteUpdatePosition = snappedPosition;
+        updateRouteFromCurrentLocation(snappedPosition);
+    }
+
+}
+}
+},
     function (error) {
       console.error(error);
 
@@ -723,4 +702,4 @@ currentLocationCircle.setLatLng(snappedPosition);
   );
 }
 
-startCurrentLocation();
+// startCurrentLocation();
