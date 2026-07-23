@@ -172,9 +172,7 @@ const roadRoutes = {
 };
 
 
-document.getElementById("myLocation").addEventListener("click", function () {
-    startCurrentLocation();
-});
+
 
 
 
