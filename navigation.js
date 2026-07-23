@@ -8,7 +8,7 @@ let activeDestinationNode = null;
 
     const gpsOption = document.createElement("option");
 gpsOption.value = "_GPS_";
-gpsOption.textContent = "📍 Use My Location";
+gpsOption.textContent = "📍 Use my location";
 startSelect.appendChild(gpsOption);
 
 // Add buildings to the two dropdown menus
@@ -146,7 +146,7 @@ showRouteButton.addEventListener("click", function () {
 }
 
 if (!currentLocationMarker && startName === "") {
-    alert("Please press Use My Location or choose a starting point.");
+    alert("Please press Use my location or choose a starting point.");
     return;
 }
 
@@ -161,7 +161,7 @@ if (startName === "_GPS_") {
 
     if (!currentLocationMarker) {
         startCurrentLocation();
-        alert("Location detected, press Show route again.");
+        alert("📍 Current location detected, press Show route again.");
         return;
     }
 
