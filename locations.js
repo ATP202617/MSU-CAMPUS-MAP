@@ -14,7 +14,7 @@ const locations = [
     x: 233,
     y: 64,
     description: "COLLEGE OF AGRICULTURE",
-    icon: "OFFICE"
+    icon: "office"
   },
   {
     name: "KFCIAAAS",
@@ -51,7 +51,7 @@ const locations = [
     x: 272,
     y: 894,
     description: "Medical Services and Hospital",
-    icon: "office"
+    icon: "Hospital"
     },
 
     {
@@ -59,7 +59,7 @@ const locations = [
     x: 372,
     y: 836,
     description: "Rajah Indarapatra Hall",
-    icon: "Office"
+    icon: "office"
 },
     {
     name: "CICS",
@@ -95,154 +95,154 @@ const locations = [
     x: 537,
     y: 712,
     description: "UNIVERSITY LIBRARY",
-    icon: "LIBRARY"
+    icon: "library"
 },
 {
     name: "AGA KHAN",
     x: 400,
     y: 644,
     description: "AGA KHAN MUSEUM",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "ICTC",
     x: 500,
     y: 636,
     description: "INFORMATION AND COMMUNICATIONS TECHNOLOGY CENTER",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "CNSM",
     x: 582,
     y: 536,
     description: "COLLEGE OF NATURAL SCIENCES AND MATHEMATICS",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "CSSH",
     x: 585,
     y: 473,
     description: "COLLEGE OF SOCIAL SCIENCES AND HUMANITIES",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "BH",
     x: 903,
     y: 269,
     description: "BOLAWAN HALL",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "OIPP",
     x: 745,
     y: 62,
     description: "Office of information, press and publication",
-    icon: "Office"
+    icon: "office"
 },
 {
     name: "kd",
     x: 658,
     y: 42,
     description: "Khadija Dormitory",
-    icon: "Office"
+    icon: "office"
 },
 {
     name: "PMH",
     x: 602,
     y: 56,
     description: "POTRE MAAMOR HALL",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "RSD",
     x: 674,
     y: 254,
     description: "RAJAH SOLAIMAN DORMITORY",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "SNBD",
     x: 591,
     y: 301,
     description: "SUPER NEW BOYS DORMITORY",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "SNGD",
     x: 528,
     y: 266,
     description: "SUPER NEW GIRLS DORMITORY",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "CPA",
     x: 428,
     y: 257,
     description: "COLLEGE OF PUBLIC AFFAIRS",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "CED",
     x: 457,
     y: 134,
     description: "COLLEGE OF EDUCATION",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "COE",
     x: 638,
     y: 154,
     description: "COLLEGE OF ENGINEERING",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "COL",
     x: 384,
     y: 101,
     description: "COLLEGE OF LAW",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "CBAA",
     x: 317,
     y: 153,
     description: "COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "GYMNASIUM",
     x: 140,
     y: 248,
     description: "DIMAPORO GYMNASIUM",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "CSPEAR",
     x: 192,
     y: 330,
     description: "COLLEGE OF SPORTS, PHYSICAL EDUCATION, AND RECREATION",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "DSS",
     x: 136,
     y: 462,
     description: "DEPARTMENT OF SECURITY SERVICES",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "PLH",
     x: 287,
     y: 564,
     description: "PRINCESS LAWANEN HALL",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "BOTANICAL",
     x: 289,
     y: 654,
     description: "BOTANICAL GARDEN",
-    icon: "OFFICE"
+    icon: "office"
 },
 {
     name: "Presidential House",
