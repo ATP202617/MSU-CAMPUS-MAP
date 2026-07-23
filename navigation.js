@@ -4,6 +4,8 @@ const destinationSelect =
 
 let routeLine = null;
 
+let activeDestinationNode = null;
+
 // Add buildings to the two dropdown menus
 locations.forEach(function (location) {
     const startOption = document.createElement("option");
@@ -131,33 +133,53 @@ showRouteButton.addEventListener("click", function () {
     const startName = startSelect.value;
     const destinationName = destinationSelect.value;
 
-    if (startName === "" || destinationName === "") {
-        alert("Please choose a starting point and destination.");
-        return;
-    }
+   if (destinationName === "") {
+    alert("Please choose a destination.");
+    return;
+}
 
-    if (startName === destinationName) {
-        alert("Please choose two different locations.");
-        return;
-    }
+if (!currentLocationMarker && startName === "") {
+    alert("Please press Use My Location or choose a starting point.");
+    return;
+}
 
+if (startName !== "" && startName === destinationName) {
+    alert("Please choose two different locations.");
+    return;
+}
+
+  let startNode;
+
+if (currentLocationMarker) {
+    const currentPosition = currentLocationMarker.getLatLng();
+
+    startNode = findNearestRoadNode(
+        currentPosition.lng,
+        currentPosition.lat
+    );
+} else {
     const startBuilding = locations.find(function (location) {
-    return location.name === startName;
-});
+        return location.name === startName;
+    });
+
+    startNode = findNearestRoadNode(
+        startBuilding.x,
+        startBuilding.y
+    );
+}
 
 const destinationBuilding = locations.find(function (location) {
     return location.name === destinationName;
 });
 
-    const startNode = findNearestRoadNode(
-    startBuilding.x,
-    startBuilding.y
-);
+  
 
-const destinationNode = findNearestRoadNode(
+    const destinationNode = findNearestRoadNode(
     destinationBuilding.x,
     destinationBuilding.y
 );
+
+    activeDestinationNode = destinationNode;
 
     const path = findShortestPath(
     startNode.id,
@@ -199,3 +221,50 @@ map.fitBounds(routeLine.getBounds(), {
 
 //map.setView([startBuilding.y, startBuilding.x], 0);
 });
+
+function updateRouteFromCurrentLocation(currentPosition) {
+    console.log("GPS route updating...", currentPosition);
+    if (!activeDestinationNode) {
+        return;
+    }
+
+    const currentNode = findNearestRoadNode(
+        currentPosition[1], // x
+        currentPosition[0]  // y
+    );
+
+    if (!currentNode) {
+        return;
+    }
+
+    const path = findShortestPath(
+        currentNode.id,
+        activeDestinationNode.id
+    );
+
+    if (!path || path.length === 0) {
+        console.log("No route found from current location.");
+        return;
+    }
+
+    const routeCoordinates = path.map(function (nodeId) {
+        const node = roadNodes.find(function (roadNode) {
+            return roadNode.id === nodeId;
+        });
+
+        return [node.y, node.x];
+    });
+
+    // Begin the magenta line at the exact GPS position.
+    routeCoordinates.unshift(currentPosition);
+
+    if (routeLine) {
+        routeLine.setLatLngs(routeCoordinates);
+    } else {
+        routeLine = L.polyline(routeCoordinates, {
+            color: "magenta",
+            weight: 7,
+            opacity: 0.9
+        }).addTo(map);
+    }
+}
