@@ -244,4 +244,11 @@ const locations = [
     description: "BOTANICAL GARDEN",
     icon: "OFFICE"
 },
+{
+    name: "Presidential House",
+    x: 648,
+    y: 844,
+    description: "Presidential House",
+    icon: "office"
+},
 ];
