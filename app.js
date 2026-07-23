@@ -25,6 +25,8 @@ button.onclick = () => {
 
 const markers = [];
 
+let selectedRoadLine = null;
+
 locations.forEach(location => {
 
     const customIcon = L.icon({
@@ -178,15 +180,86 @@ document.getElementById("myLocation").addEventListener("click", function () {
 
     if (ADMIN_MODE){
 
-    roadNodes.forEach(function (node) {
-    L.circleMarker([node.y, node.x], {
-        radius: 5,
+            roadNodes.forEach(function (node) {
+    const marker = L.circleMarker([node.y, node.x], {
+        radius: 10,
+        color: "red",
+        fillColor: "red",
         weight: 2,
         fillOpacity: 1
     })
     .addTo(map)
     .bindPopup("Road Node: " + node.id);
+
+    marker.on("click", function (e) {
+        L.DomEvent.stopPropagation(e.originalEvent);
+
+        if (!roadEditMode) return;
+
+        // First selected node
+        if (selectedRoadNode === null) {
+            selectedRoadNode = node;
+            selectedRoadMarker = marker;
+
+            marker.setStyle({
+                color: "green",
+                fillColor: "green"
+            });
+
+            return;
+        }
+
+        // Prevent connecting a node to itself
+        if (selectedRoadNode.id === node.id) {
+            return;
+        }
+
+        // Draw connection
+        const newRoadLine = L.polyline(
+            [
+                [selectedRoadNode.y, selectedRoadNode.x],
+                [node.y, node.x]
+            ],
+            {
+                color: "blue",
+                weight: 3
+            }
+        ).addTo(map);
+
+        roadLines.push({
+            from: selectedRoadNode.id,
+            to: node.id,
+            line: newRoadLine
+        });
+
+        // Save connection in both directions
+        if (!roadConnections[selectedRoadNode.id]) {
+            roadConnections[selectedRoadNode.id] = [];
+        }
+
+        if (!roadConnections[node.id]) {
+            roadConnections[node.id] = [];
+        }
+
+        if (!roadConnections[selectedRoadNode.id].includes(node.id)) {
+            roadConnections[selectedRoadNode.id].push(node.id);
+        }
+
+        if (!roadConnections[node.id].includes(selectedRoadNode.id)) {
+            roadConnections[node.id].push(selectedRoadNode.id);
+        }
+
+        // Return selected node to red
+        selectedRoadMarker.setStyle({
+            color: "red",
+            fillColor: "red"
+        });
+
+        selectedRoadNode = null;
+        selectedRoadMarker = null;
+    });
 });
+   
 }
 Object.keys(roadConnections).forEach(function (nodeId) {
 
@@ -270,7 +343,7 @@ map.on("click", function (e) {
     fillColor: "red",
     fillOpacity: 1
 }).addTo(map);
-}
+   
 marker.bindPopup("Road Node: " + newNode.id);
 
 marker.on("click", function (e) {
@@ -298,6 +371,36 @@ const newRoadLine = L.polyline([
     weight: 3
 }).addTo(map);
 
+    newRoadLine.on("click", function (e) {
+    L.DomEvent.stopPropagation(e);
+
+    if (!roadEditMode) return;
+
+    newRoadLine.setStyle({
+        color: "yellow"
+    });
+
+    selectedRoadLine = newRoadLine;
+});
+
+newRoadLine.on("click", function () {
+    if (!roadEditMode) return;
+
+    map.removeLayer(newRoadLine);
+
+    // Remove from roadLines array
+    roadLines = roadLines.filter(function (r) {
+        return r.line !== newRoadLine;
+    });
+
+    // Remove from roadConnections
+    roadConnections[selectedRoadNode.id] =
+        roadConnections[selectedRoadNode.id].filter(id => id !== newNode.id);
+
+    roadConnections[newNode.id] =
+        roadConnections[newNode.id].filter(id => id !== selectedRoadNode.id);
+});
+
 roadLines.push({
     from: selectedRoadNode.id,
     to: newNode.id,
@@ -323,10 +426,22 @@ marker.setStyle({
     color: "red",
     fillColor: "red"
 });
-
+selectedRoadMarker = null;
+    }
+});
     document.addEventListener("keydown", function (e) {
     if (e.key !== "Delete") return;
     if (!roadEditMode) return;
+    if (selectedRoadLine) {
+    map.removeLayer(selectedRoadLine);
+
+    roadLines = roadLines.filter(function (r) {
+        return r.line !== selectedRoadLine;
+    });
+
+    selectedRoadLine = null;
+    return;
+}
     if (!selectedRoadNode || !selectedRoadMarker) return;
 
     const nodeId = selectedRoadNode.id;
@@ -373,9 +488,9 @@ marker.setStyle({
     roadEditorStatus.textContent = "Node deleted";
 });
 
+    
     }
 
-});
 
 });
 
