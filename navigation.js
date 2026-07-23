@@ -6,6 +6,11 @@ let routeLine = null;
 
 let activeDestinationNode = null;
 
+    const gpsOption = document.createElement("option");
+gpsOption.value = "_GPS_";
+gpsOption.textContent = "📍 Use My Location";
+startSelect.appendChild(gpsOption);
+
 // Add buildings to the two dropdown menus
 locations.forEach(function (location) {
     const startOption = document.createElement("option");
@@ -149,9 +154,16 @@ if (startName !== "" && startName === destinationName) {
     return;
 }
 
-  let startNode;
+ let startNode;
 
-if (currentLocationMarker) {
+if (startName === "_GPS_") {
+
+    if (!currentLocationMarker) {
+        startCurrentLocation();
+        alert("Please wait while your location is detected, and press Show route again.");
+        return;
+    }
+
     const currentPosition = currentLocationMarker.getLatLng();
 
     startNode = findNearestRoadNode(
@@ -159,16 +171,21 @@ if (currentLocationMarker) {
         currentPosition.lat,
         40
     );
+
 } else {
-    const startBuilding = locations.find(function (location) {
+
+    const startBuilding = locations.find(function(location) {
         return location.name === startName;
     });
 
     startNode = findNearestRoadNode(
         startBuilding.x,
-        startBuilding.y
+        startBuilding.y,
+        40
     );
 }
+
+
 
     if (!startNode) {
     alert("Move closer to a road before starting navigation.");
