@@ -23,13 +23,11 @@ locations.forEach(function (location) {
 
 const showRouteButton = document.getElementById("showRoute");
 
-    function findNearestRoadNode(x, y) {
-
+  function findNearestRoadNode(x, y, maxDistance = Infinity) {
     let nearestNode = null;
     let shortestDistance = Infinity;
 
     roadNodes.forEach(function (node) {
-
         const distance = Math.sqrt(
             Math.pow(node.x - x, 2) +
             Math.pow(node.y - y, 2)
@@ -39,8 +37,11 @@ const showRouteButton = document.getElementById("showRoute");
             shortestDistance = distance;
             nearestNode = node;
         }
-
     });
+
+    if (shortestDistance > maxDistance) {
+        return null;
+    }
 
     return nearestNode;
 }
@@ -155,7 +156,8 @@ if (currentLocationMarker) {
 
     startNode = findNearestRoadNode(
         currentPosition.lng,
-        currentPosition.lat
+        currentPosition.lat,
+        40
     );
 } else {
     const startBuilding = locations.find(function (location) {
@@ -168,6 +170,11 @@ if (currentLocationMarker) {
     );
 }
 
+    if (!startNode) {
+    alert("Move closer to a road before starting navigation.");
+    return;
+}
+
 const destinationBuilding = locations.find(function (location) {
     return location.name === destinationName;
 });
@@ -178,6 +185,11 @@ const destinationBuilding = locations.find(function (location) {
     destinationBuilding.x,
     destinationBuilding.y
 );
+
+    if (!destinationNode) {
+    alert("Destination is too far from a road.");
+    return;
+}
 
     activeDestinationNode = destinationNode;
 
@@ -230,7 +242,8 @@ function updateRouteFromCurrentLocation(currentPosition) {
 
     const currentNode = findNearestRoadNode(
         currentPosition[1], // x
-        currentPosition[0]  // y
+        currentPosition[0],  // y
+        40
     );
 
     if (!currentNode) {
