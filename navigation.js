@@ -25,6 +25,7 @@ locations.forEach(function (location) {
 });
 
 
+clearRouteButton = document.getElementById("clearRoute");
 
 const showRouteButton = document.getElementById("showRoute");
 
@@ -160,7 +161,7 @@ if (startName === "_GPS_") {
 
     if (!currentLocationMarker) {
         startCurrentLocation();
-        alert("Please wait while your location is detected, and press Show route again.");
+        alert("Location detected, press Show route again.");
         return;
     }
 
@@ -238,7 +239,7 @@ if (routeLine) {
 }
 
 routeLine = L.polyline(routeCoordinates, {
-    color: "magenta",
+    color: "red",
     weight: 7,
     opacity: 0.9
 }).addTo(map);
@@ -292,9 +293,25 @@ function updateRouteFromCurrentLocation(currentPosition) {
         routeLine.setLatLngs(routeCoordinates);
     } else {
         routeLine = L.polyline(routeCoordinates, {
-            color: "magenta",
+            color: "red",
             weight: 7,
             opacity: 0.9
         }).addTo(map);
     }
 }
+
+
+
+clearRouteButton.addEventListener("click", function () {
+
+    if (routeLine) {
+        map.removeLayer(routeLine);
+        routeLine = null;
+    }
+
+    activeDestinationNode = null;
+
+    startSelect.selectedIndex = 0;
+    destinationSelect.selectedIndex = 0;
+
+});
