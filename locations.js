@@ -51,7 +51,7 @@ const locations = [
     x: 272,
     y: 894,
     description: "Medical Services and Hospital",
-    icon: "Hospital"
+    icon: "office"
     },
 
     {
