@@ -10,238 +10,242 @@ const locations = [
   
   
   {
-    name: "COA",
+    name: "College of Agriculture",
     x: 233,
     y: 64,
-    description: "COLLEGE OF AGRICULTURE",
+    description: "",
     icon: "office"
   },
   {
-    name: "KFCIAAAS",
+    name: "King Faisal Center for Islamic, Arabic and Asian Studies",
     x: 1232,
     y: 738,
-    description: "King Faisal Center for Islamic, Arabic and Asian Studies",
-    icon: "office"
+    category: " ",
+    description: "",
+    icon: "office",
+    hours: "8:00am - 5:00pm",
+    image: 'images/kfciaaas.jpg'
   },
   {
-    name: "CFES",
+    name: "College of Forestry and Environmental Studies",
     x: 949,
     y: 769,
-    description: "College of Forestry and Environmental Studies",
+    description: "",
     icon: "office"
    },
    {
-    name: "CFAS",
+    name: "College of Fisheries and Aquatic Sciences",
     x: 834,
     y: 878,
-    description: "College of Fisheries and Aquatic Sciences",
+    description: "",
     icon: "office"
     },
 
     {
-    name: "CHTM",
+    name: "Colleg of Hospitality and Tourism Management",
     x: 668,
     y:898,
-    description: "Colleg of Hospitality and Tourism Management",
+    description: "",
     icon: "office"
     },
 
     {
-    name: "MSH",
+    name: "Medical Services and Hospital",
     x: 272,
     y: 894,
-    description: "Medical Services and Hospital",
-    icon: "Hospital"
+    description: "",
+    icon: "office"
     },
 
     {
-    name: "RIH",
+    name: "Rajah Indarapatra Hall",
     x: 372,
     y: 836,
-    description: "Rajah Indarapatra Hall",
+    description: "",
     icon: "office"
 },
     {
-    name: "CICS",
+    name: "College of Information and Computing Sciences",
     x: 335,
     y: 784,
-    description: "College of Information and Computing Sciences",
+    description: "",
     icon: "office"
 },
 
     {
-    name: "ICC",
+    name: "International Convention Center",
     x: 296,
     y: 753,
-    description: "International Convention Center",
+    description: "",
     icon: "office"
 },
 {
-    name: "ISIDRO",
+    name: "Antonia Isidro Hall",
     x: 387,
     y: 750,
-    description: "Antonia Isidro Hall",
+    description: "",
     icon: "office"
 },
 {
-    name: "ADMIN",
+    name: "Ahmad Domocao Alonto Sr. Bldg.",
     x: 456,
     y: 731,
-    description: "Ahmad Domocao Alonto Sr. Bldg.",
+    description: "",
     icon: "office"
 },
 {
-    name: "LIBRARY",
+    name: "University Library",
     x: 537,
     y: 712,
-    description: "UNIVERSITY LIBRARY",
-    icon: "library"
+    description: "",
+    icon: "office"
 },
 {
-    name: "AGA KHAN",
+    name: "Aga Khan Museum",
     x: 400,
     y: 644,
-    description: "AGA KHAN MUSEUM",
+    description: "",
     icon: "office"
 },
 {
-    name: "ICTC",
+    name: "Information and Communications Technology Center",
     x: 500,
     y: 636,
-    description: "INFORMATION AND COMMUNICATIONS TECHNOLOGY CENTER",
+    description: "",
     icon: "office"
 },
 {
-    name: "CNSM",
+    name: "College of Natural Sciences and Mathematics",
     x: 582,
     y: 536,
-    description: "COLLEGE OF NATURAL SCIENCES AND MATHEMATICS",
+    description: "",
     icon: "office"
 },
 {
-    name: "CSSH",
+    name: "College of Social Sciences and Humanities",
     x: 585,
     y: 473,
-    description: "COLLEGE OF SOCIAL SCIENCES AND HUMANITIES",
+    description: "",
     icon: "office"
 },
 {
-    name: "BH",
-    x: 903,
-    y: 269,
-    description: "BOLAWAN HALL",
+    name: "Bolawan Hall",
+    x: 884,
+    y: 276,
+    description: "",
     icon: "office"
+
 },
 {
-    name: "OIPP",
+    name: "Office of information, press and publication",
     x: 745,
     y: 62,
-    description: "Office of information, press and publication",
+    description: "",
     icon: "office"
 },
 {
-    name: "kd",
+    name: "Khadija Dormitory",
     x: 658,
     y: 42,
-    description: "Khadija Dormitory",
+    description: "",
     icon: "office"
 },
 {
-    name: "PMH",
+    name: "Potre Maamor Hall",
     x: 602,
     y: 56,
-    description: "POTRE MAAMOR HALL",
+    description: "",
     icon: "office"
 },
 {
-    name: "RSD",
+    name: "Rajah Solaiman Dormitory",
     x: 674,
     y: 254,
-    description: "RAJAH SOLAIMAN DORMITORY",
+    description: "",
     icon: "office"
 },
 {
-    name: "SNBD",
+    name: "Super New Boys Dormitory",
     x: 591,
     y: 301,
-    description: "SUPER NEW BOYS DORMITORY",
+    description: "",
     icon: "office"
 },
 {
-    name: "SNGD",
+    name: "Super New Girls Dormitory",
     x: 528,
     y: 266,
-    description: "SUPER NEW GIRLS DORMITORY",
+    description: "",
     icon: "office"
 },
 {
-    name: "CPA",
+    name: "College of Public Affairs",
     x: 428,
     y: 257,
-    description: "COLLEGE OF PUBLIC AFFAIRS",
+    description: "",
     icon: "office"
 },
 {
-    name: "CED",
+    name: "College of Education",
     x: 457,
     y: 134,
-    description: "COLLEGE OF EDUCATION",
+    description: "",
     icon: "office"
 },
 {
-    name: "COE",
+    name: "College of Engineering",
     x: 638,
     y: 154,
-    description: "COLLEGE OF ENGINEERING",
+    description: "",
     icon: "office"
 },
 {
-    name: "COL",
+    name: "College of Law",
     x: 384,
     y: 101,
-    description: "COLLEGE OF LAW",
+    description: "",
     icon: "office"
 },
 {
-    name: "CBAA",
+    name: "College of Business Administration and Accountancy",
     x: 317,
     y: 153,
-    description: "COLLEGE OF BUSINESS ADMINISTRATION AND ACCOUNTANCY",
+    description: "",
     icon: "office"
 },
 {
-    name: "GYMNASIUM",
+    name: "Dimaporo Gymnasium",
     x: 140,
     y: 248,
-    description: "DIMAPORO GYMNASIUM",
+    description: "",
     icon: "office"
 },
 {
-    name: "CSPEAR",
+    name: "College of Sports, Physical Education, and Recreation",
     x: 192,
     y: 330,
-    description: "COLLEGE OF SPORTS, PHYSICAL EDUCATION, AND RECREATION",
+    description: "",
     icon: "office"
 },
 {
-    name: "DSS",
+    name: "Department of Security Services",
     x: 136,
     y: 462,
-    description: "DEPARTMENT OF SECURITY SERVICES",
+    description: "",
     icon: "office"
 },
 {
-    name: "PLH",
+    name: "Princess Lawanen Hall",
     x: 287,
     y: 564,
-    description: "PRINCESS LAWANEN HALL",
+    description: "",
     icon: "office"
 },
 {
-    name: "BOTANICAL",
+    name: "Botanical Garden",
     x: 289,
     y: 654,
-    description: "BOTANICAL GARDEN",
+    description: "",
     icon: "office"
 },
 {
@@ -251,4 +255,21 @@ const locations = [
     description: "Presidential House",
     icon: "office"
 },
+
+{
+    name: "College of Medicine",
+    x: 1434,
+    y: 780,
+    description: "COM",
+    icon: "office"
+},
+
+{
+    name: "College of Health and Sciences",
+    x: 1433,
+    y: 858,
+    description: "CHS",
+    icon: "office"
+},
+
 ];
