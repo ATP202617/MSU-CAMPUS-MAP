@@ -1,7 +1,12 @@
 html, body {
     margin: 0;
     height: 100%;
+  
 }
+
+    *{ font-family: 'Poppins', sans-serif;
+
+    }
 
 #map {
     width: 100%;
@@ -140,6 +145,18 @@ html, body {
 
 #navigationPanel h3 {
     margin-top: 0;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        #fee5f6 0%,
+        #d10393 100%
+    );
+ border: 1px solid #e3f2e8;
+    border-radius: 22px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+
+    z-index: 1000;
 }
 
 #navigationPanel select,
@@ -159,8 +176,13 @@ html, body {
 }
 
     #navigationPanel button {
-    background: #00695c;
-    color: white;
+    background:linear-gradient(
+         80deg,
+        #c0fba6 0%,
+        #b9f63f 50%,
+        #6fad0a 100%
+    );
+    color: rgb(188, 3, 151);
     cursor: pointer;
 }
 
@@ -169,7 +191,7 @@ html, body {
 }
 
 #navigationPanel select {
-    border: 1px solid #ccc;
+    border: 1px solid #e11f97;
     background: white;
 }
 
