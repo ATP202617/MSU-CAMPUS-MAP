@@ -52,7 +52,7 @@ const marker = L.marker(
 
         <p>${location.description}</p>
 
-        <p><strong>Category:</strong> ${location.category || 'N/A'}</p>
+        
 
         <p><strong>Hours:</strong> ${location.hours || 'N/A'}</p>
     </div>
@@ -316,7 +316,10 @@ roadEditCheckbox.addEventListener("change", function () {
     }
 
 });
-    let nextRoadNodeNumber = roadNodes.length + 1;
+    let nextRoadNodeNumber =
+    Math.max(
+        ...roadNodes.map(node => parseInt(node.id.replace("N", ""), 10))
+    ) + 1;
 
 map.on("click", function (e) {
 
@@ -755,10 +758,25 @@ function startCurrentLocation() {
       console.log("Longitude:", longitude);
       console.log("Accuracy:", accuracy);
 
+        // MSU campus GPS boundaries
+const campusMinLatitude = 7.9900;
+const campusMaxLatitude = 8.0030;
+const campusMinLongitude = 124.2550;
+const campusMaxLongitude = 124.2680;
+
+if (
+    latitude < campusMinLatitude ||
+    latitude > campusMaxLatitude ||
+    longitude < campusMinLongitude ||
+    longitude > campusMaxLongitude
+) {
+    alert("Current location is outside the campus.");
+    return;
+}
+
       // Temporary location marker.
       // We will convert the real GPS coordinates to your campus map coordinates next.
       const temporaryMapPosition = gpsToMap(latitude, longitude);
-
         const snappedPosition =
   snapToNearestRoadSegment(temporaryMapPosition);
 
