@@ -194,6 +194,8 @@ backdrop-filter: blur(10px);
 #navigationPanel select {
     border: 1px solid #e11f97;
     background: white;
+      
+  
 }
 
 #roadEditorPanel {
@@ -230,12 +232,19 @@ backdrop-filter: blur(10px);
   box-shadow: 0 0 0 3px rgba(22, 137, 255, 0.35);
 }
 
-#navigationPanel {
-    background:  #F4FBEA;
+#navigationPanel{
+    background: rgba(2, 17, 41, 0.9);
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.12);
     border: 1px solid #DDECCB;
+
+    /* Watermark */
+    background-image: url("images/aaaa.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 150%;
+    background-blend-mode: lighten;
 }
 
 /* Navigation Title */
@@ -246,19 +255,21 @@ backdrop-filter: blur(10px);
     gap:-2px;
 
     margin:0 0 18px;
-    padding:10px 20px;
+    padding:10px 10px;
 
     background:linear-gradient(90deg,#eaa4d4,#d7198b,#b50078);
-    border-radius:30px;
+    border-radius:10px;
 
     font-family: 'Poppins', sans-serif;
     font-size:18px;
-    font-weight:600;
+    font-weight:700;
     color:#f9f9f9;
+    
 }
 
 #navigationPanel .msu-logo{
-    width:40px;
+    width:50px;
     height:40px;
     object-fit:contain;
 }
+
